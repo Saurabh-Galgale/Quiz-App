@@ -33,7 +33,9 @@ export default function QuizPage() {
     const fetchQuiz = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:4000/api/quizzes/${id}`);
+        const res = await fetch(
+          `https://quizzywebapp.vercel.app/api/quizzes/${id}`
+        );
         if (!res.ok) {
           throw new Error("Failed to fetch quiz");
         }
@@ -123,7 +125,7 @@ export default function QuizPage() {
         .filter(Boolean);
 
       const res = await fetch(
-        `http://localhost:4000/api/quizzes/${quiz._id}/submit`,
+        `https://quizzywebapp.vercel.app/api/quizzes/${quiz._id}/submit`,
         {
           method: "POST",
           headers: {

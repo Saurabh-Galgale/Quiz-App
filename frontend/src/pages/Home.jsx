@@ -19,7 +19,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/quizzes");
+        const res = await fetch("https://quizzywebapp.vercel.app/api/quizzes");
         if (!res.ok) {
           throw new Error("Failed to fetch quizzes");
         }

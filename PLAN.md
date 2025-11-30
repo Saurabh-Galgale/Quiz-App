@@ -1,12 +1,10 @@
-# Quiz App – Plan
+# Quiz App
 
-<!-- **Live Demo:** [https://your-live-link-here.com](https://your-live-link-here.com) -->
+**Live Demo:** [https://quizzywebapp.netlify.app/](https://quizzywebapp.netlify.app/)
 
 ## High-Level Design Diagram
 
-```md
 ![Quiz App High Level Design](./frontend/src/assets/hld.jpg)
-```
 
 ## 1. High-Level Overview
 
