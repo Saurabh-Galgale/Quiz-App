@@ -1,4 +1,4 @@
-# Quiz App – Plan
+# Quiz App
 
 **Live Demo:** [https://quizzywebapp.netlify.app/](https://quizzywebapp.netlify.app/)
 
