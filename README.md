@@ -4,9 +4,7 @@
 
 ## High-Level Design Diagram
 
-```md
 ![Quiz App High Level Design](./frontend/src/assets/hld.jpg)
-```
 
 ## 1. High-Level Overview
 
