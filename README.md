@@ -151,3 +151,50 @@ Admin can create quizzes, users can see the list of quizzes, attempt a single qu
    - Deploy backend (e.g., Render / Railway / Heroku alternative / VPS)
    - Deploy frontend (e.g., Netlify / Vercel)
    - Update **Live Demo** link at the top of this file
+
+---
+
+## 6. If I Had More Time (Next Steps)
+
+If I had more time, I would extend this system in a few directions:
+
+1. **User Accounts (Sign Up / Sign In)**
+
+   - Add authentication (e.g., email + password, JWT-based sessions).
+   - Allow users to register and log in so quiz attempts can be linked to a specific user.
+   - Basic profile page showing their name and email.
+
+2. **Store Quiz Submissions Per User**
+
+   - Create a separate `submissions` collection to store each quiz attempt:
+     - `userId`
+     - `quizId`
+     - `answers`
+     - `score`, `maxScore`, `correctCount`
+     - `createdAt`
+   - This would allow tracking history over time and prevent duplicate attempts if needed.
+
+3. **Analytics & Charts for Admin**
+
+   - Simple analytics dashboard for admin:
+     - Average score per quiz
+     - Number of attempts per quiz
+     - Distribution of scores (e.g., bar chart)
+   - Use a lightweight chart library on the frontend to visualize:
+     - Completion rate
+     - Difficult questions (questions with a low correct ratio)
+
+4. **Feedback & Review Page for Users**
+
+   - A “My Performance” page where logged-in users can see:
+     - Past attempts
+     - Scores trend over time
+     - Which topics or quizzes they are strong/weak at
+   - Optional feedback per quiz: users can rate difficulty and leave comments (stored and visible only to admin).
+
+5. **Better Quiz Configuration**
+   - Timer support for timed quizzes.
+   - Settings like:
+     - Shuffle questions
+     - Shuffle options
+     - Limit number of attempts per user.

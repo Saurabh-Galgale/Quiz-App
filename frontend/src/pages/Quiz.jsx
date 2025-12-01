@@ -328,27 +328,41 @@ export default function QuizPage() {
       <Box mt={3} display="flex" flexDirection="column" gap={2}>
         {submitError && <Typography color="error">{submitError}</Typography>}
 
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-          disabled={submitting}
-        >
-          {submitting ? "Submitting..." : "Submit Quiz"}
-        </Button>
+        {/* 🔹 Before submission — show Submit button */}
+        {!result && (
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            disabled={submitting}
+          >
+            {submitting ? "Submitting..." : "Submit Quiz"}
+          </Button>
+        )}
 
+        {/* 🔹 After submission — show Home button */}
         {result && (
-          <Box mt={2}>
-            <Divider sx={{ mb: 2 }} />
-            <Typography variant="h6" fontWeight={600} mb={1}>
-              Result
-            </Typography>
-            <Typography variant="body1">
-              Score: {result.score} / {result.maxScore}
-            </Typography>
-            <Typography variant="body2" color="text.secondary" mb={1}>
-              Correct: {result.correctCount} / {result.totalQuestions}
-            </Typography>
-          </Box>
+          <>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => (window.location.href = "/")}
+            >
+              Go to Home
+            </Button>
+
+            <Box mt={2}>
+              <Divider sx={{ mb: 2 }} />
+              <Typography variant="h6" fontWeight={600} mb={1}>
+                Result
+              </Typography>
+              <Typography variant="body1">
+                Score: {result.score} / {result.maxScore}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" mb={1}>
+                Correct: {result.correctCount} / {result.totalQuestions}
+              </Typography>
+            </Box>
+          </>
         )}
       </Box>
     </Container>
