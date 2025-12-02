@@ -28,6 +28,12 @@ export default function QuizPage() {
   const [result, setResult] = useState(null);
   const [submitError, setSubmitError] = useState(null);
 
+  const totalTime = 30;
+  const warningTime = 5;
+
+  const [timeLeft, setTimeLeft] = useState(totalTime);
+  const [showWarning, setShowWarning] = useState(false);
+
   // Fetch single quiz
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -40,6 +46,8 @@ export default function QuizPage() {
           throw new Error("Failed to fetch quiz");
         }
         const data = await res.json();
+        // suffle questions to prevent cheating
+        data.questions.sort(() => Math.random() - 0.5);
         setQuiz(data);
       } catch (err) {
         setError(err.message || "Something went wrong");
@@ -52,6 +60,26 @@ export default function QuizPage() {
       fetchQuiz();
     }
   }, [id]);
+
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      handleSubmit();
+      return;
+    }
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timeLeft]);
+
+  useEffect(() => {
+    if (timeLeft === warningTime) {
+      setShowWarning(true);
+    } else {
+      setShowWarning(false);
+    }
+  }, [timeLeft]);
 
   // Handlers to update answers state
   const handleMcqChange = (questionId, optionIndex) => {
@@ -178,6 +206,10 @@ export default function QuizPage() {
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
+      <div style={{ position: "fixed", top: 80, right: 20, zIndex: 1000 }}>
+        time left : {timeLeft} second{timeLeft !== 1 ? "s" : ""}
+      </div>
+
       <Typography variant="h4" fontWeight={600} mb={1}>
         {quiz.title}
       </Typography>
@@ -365,6 +397,33 @@ export default function QuizPage() {
           </>
         )}
       </Box>
+      {showWarning && (
+        <div
+          style={{
+            position: "fixed",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(255, 0, 0, 0.3)",
+            zIndex: 999,
+          }}
+        >
+          <div>
+            <Typography
+              variant="h3"
+              fontWeight={700}
+              color="red"
+              textAlign="center"
+            >
+              Hurry up! Only {timeLeft} second{timeLeft !== 1 ? "s" : ""} left!
+            </Typography>
+          </div>
+        </div>
+      )}
     </Container>
   );
 }
